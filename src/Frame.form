@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.4" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+              <Component id="playerAge" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+              <Component id="ageBtn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
+                      <Component id="club1Lbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="allPlayersBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                      <Component id="club1Box" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="91" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="club2Box" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+                      <Component id="club3Box" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="club2Lbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
+                      <Component id="club3Lbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="club1Lbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="club2Lbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="club3Lbl" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="allPlayersBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="club1Box" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="club2Box" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="club3Box" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="252" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="playerAge" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ageBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JComboBox" name="allPlayersBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="allPlayersBoxItemStateChanged"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;Item&lt;Player&gt;&gt;()"/>
+        <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="*/&#xa;private javax.swing.JComboBox&lt;Item&lt;Player&gt;&gt; allPlayersBox;"/>
+        <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/*"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="*/"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="/*"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="playerAge">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Player&apos;s age"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="ageBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="See age"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ageBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="All players:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="club1Lbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Club 1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="club2Lbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Club 2"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="club3Lbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Club 3"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="club1Box">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="club1BoxItemStateChanged"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;Item&lt;Player&gt;&gt;()"/>
+        <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="*/&#xa;private javax.swing.JComboBox&lt;Item&lt;Player&gt;&gt; club1Box;"/>
+        <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/*"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="*/"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="/*"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="club2Box">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="club2BoxItemStateChanged"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;Item&lt;Player&gt;&gt;()"/>
+        <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="*/&#xa;private javax.swing.JComboBox&lt;Item&lt;Player&gt;&gt; club2Box;"/>
+        <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/*"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="*/"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="/*"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="club3Box">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="club3BoxItemStateChanged"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;Item&lt;Player&gt;&gt;()"/>
+        <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="*/&#xa;private javax.swing.JComboBox&lt;Item&lt;Player&gt;&gt; club3Box;"/>
+        <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/*"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="*/"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="/*"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+  </SubComponents>
+</Form>
