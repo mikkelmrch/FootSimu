@@ -27,8 +27,19 @@ public class Frame extends javax.swing.JFrame {
         PF.registerClub("Aab", 1920, getClub1());
         PF.registerClub("AGF", 1889, getClub2());
         PF.registerClub("FCK", 1905, getClub3());
-        
-        PF.generatePlayers(12);
+        System.out.println(PF.getAllPlayers().size());
+        /*
+        PF.generatePlayer();
+        PF.generatePlayer();
+        PF.generatePlayer();
+        PF.generatePlayer();
+        PF.generatePlayer();
+        PF.generatePlayer();
+        PF.generatePlayer();
+        PF.generatePlayer();
+        PF.generatePlayer();
+        PF.generatePlayer();*/
+        PF.generatePlayers(12, 3);
         
         addToBox(allPlayersBox, PF.getSortedPlayerList(PF.PLAYERS));
         // Add players in club 1 to box of that club
@@ -37,6 +48,7 @@ public class Frame extends javax.swing.JFrame {
         addToBoxByID(club2Box, PF.getAllClubs().get(1).getPlayers());
         // Add players in club 3 to box of that club
         addToBoxByID(club3Box, PF.getAllClubs().get(2).getPlayers());
+        pack();
     }
 
     /**
