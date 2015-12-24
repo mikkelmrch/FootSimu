@@ -16,6 +16,7 @@ public class Club {
     private ArrayList<UUID> players;
     private String clubName;
     private int year;
+    private UUID manager;
     private UUID id;
     
     public Club(String name, int year){
@@ -23,11 +24,16 @@ public class Club {
         this.year = year;
         this.id = UUID.randomUUID();
         this.players = new ArrayList<UUID>();
-        PlayerFactory.CLUBS.add(this);
+        //this.manager = new Manager();
+        PersonFactory.CLUBS.add(this);
     }
     
     public void addPlayerToClub(Player p){
-        this.players.add(p.getID());
+        if(this.players.size() <= 28){
+            this.players.add(p.getID());
+        } else {
+            System.out.println("The limit of a total of 28 players in a club has been reached.");
+        }
     }
     
     public String getName(){
@@ -44,5 +50,13 @@ public class Club {
     
     public ArrayList<UUID> getPlayers(){
         return this.players;
+    }
+    
+    public UUID getManagerID(){
+        return this.manager;
+    }
+    
+    public void setManager(UUID m){
+        this.manager = m;
     }
 }

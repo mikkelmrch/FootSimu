@@ -16,15 +16,19 @@ import javax.swing.JLabel;
  *
  * @author mikkelmoerch
  */
-public class PlayerFactory {
-    static ArrayList<Player> PLAYERS = new ArrayList<Player>();
+public class PersonFactory {
+    /** List of all registered persons. */
+    static ArrayList<Person> PERSONS = new ArrayList<Person>();
+    /** List of all registred clubs. */
     static ArrayList<Club> CLUBS = new ArrayList<Club>();
+    //This may not be needed -- static ArrayList<Manager> MANAGERS = new ArrayList<Manager>();
     ArrayList<String> firstNames;
     ArrayList<String> surNames;
     ArrayList<String> fNTest;
     ArrayList<String> sNTest;
+    public enum PersonType {PLAYER, MANAGER};
 
-    public PlayerFactory() {
+    public PersonFactory() {
         this.firstNames = new ArrayList<>(Arrays.asList("Anders", "Andreas", "Albert", 
             "William", "Noah", "Emil", "Frederik", "Oliver", "Magnus", 
             "Elias", "Anton", "Alfred", "Alexander", 
@@ -67,76 +71,90 @@ public class PlayerFactory {
             "Thygesen", "Thøgersen", "Toft", "Vestergård", "Villadsen", "Vinther",
             "Winther", "Østergård", "Ågård", "Aagård"));
         
-                this.fNTest = new ArrayList<>(Arrays.asList("Anders", "Bjarne", "Carsten"));
-                this.sNTest = new ArrayList<>(Arrays.asList("Andersen", "Curth", "Jeppesen"));
+                this.fNTest = new ArrayList<>(Arrays.asList("Anders", "Bjarne", "Carsten","Rasmus", "Bastian", "Ludvig", "Milas", "Jacob"));
+                this.sNTest = new ArrayList<>(Arrays.asList("Andersen", "Curth", "Jeppesen","Winther", "Østergård","Lund", "Madsen", "Villadsen"));
     }
     
     public void registerPlayer(int age, String firstname, String lastname, Club club){
         Player p = new Player(age, firstname, lastname, club);
-        PLAYERS.add(p);
+        PERSONS.add(p);
     }
     
     /** Registers a new Club.
      * 
      * @param name The name of the Club.
      * @param year The year the club was founded.
-     * @param title The JLabel of the Club.
      */
-    public void registerClub(String name, int year, JLabel title){
+    public void registerClub(String name, int year){
         new Club(name, year);
-        title.setText(name);
     }
     
-    /** Generates a given amount of Player objects to each existing club.
+    /** Generates a given amount of Person objects to each existing club.
      * 
-     * @param numOfPlayers The number of Player objects to be created and added to each existing club.
-     * @param numOfPlayersInEachClub the number of Player objects to be created for each club.
+     * @param type The object PersonType to be created.
+     * @param numOfPersons The number of Player objects to be created and added to each existing club.
      */
-    public void generatePlayers(int numOfPlayers, int numOfPlayersInEachClub){
-        int NC = namesCombinations(fNTest, sNTest);
+    public void generatePersons(int numOfPersons, PersonType type){
         
+        // possible name combinations
+        //int NC = namesCombinations(fNTest, sNTest);
+        int NC = namesCombinations(firstNames, surNames);
         //number of clubs
         int numOfClubs = this.CLUBS.size();
+        int numOfPersonsInEachClub = numOfPersons/numOfClubs;
+        int count = 0;
         
-        // Generate players while the total amount of created players is less than 
-        // the amount of available names
-        while (PLAYERS.size() < NC){
-            for(int i = 0; i < numOfClubs; i++){
-                //System.out.println("The i is now at "+i);
-                for(int j = 0; j < numOfPlayersInEachClub; j++){
-                    System.out.println("The j is now at "+j);
-                    // Player with unique name
-                    Player p = generatePlayer();
-                            //System.out.println("The Player "+p.getName()+" has been created.");
-                            // Added to overall list
-                            this.PLAYERS.add(p);
-                            // Added to club at index i
-                            this.CLUBS.get(i).getPlayers().add(p.getID());
-                            //System.out.println("and added to the club "+this.CLUBS.get(i).getName());
+            // Generate players while the total amount of created players is less than 
+            // the amount of available names
+            while (PERSONS.size() < NC && count < numOfPersons){
+                for(int i = 0; i < numOfClubs; i++){
+                    //System.out.println("The i is now at "+i);
+                    for(int j = 0; j < numOfPersonsInEachClub; j++){
+                        //System.out.println("The j is now at "+j);
+                        // Person with unique name
+                        Person p = generatePerson(type);
+                                
+                                if(p instanceof Player){
+                                    Player plr = (Player) p;
+                                    this.PERSONS.add(plr);
+                                    count++;
+                                    // Added to club at index i
+                                    this.CLUBS.get(i).getPlayers().add(plr.getID());
+                                } else if(p instanceof Manager){
+                                    Manager m = (Manager) p;
+                                    // Added to overall list
+                                    this.PERSONS.add(m);
+                                    count++;
+                                    // Added to club at index i
+                                    this.CLUBS.get(i).setManager(m.getID());
+                                } else {
+                                    System.out.println("There was an error.");
+                                }
+                    }
                 }
             }
-        }
         // In case more players are requested to be generated than there is available, a message is displayed
-        if(numOfPlayers > NC){
-            System.out.println("You've requested to generate " + numOfPlayers + " players, however there is only " + NC + " possible names combinations.");
+        if(numOfPersons > NC){
+            System.out.println("You've requested to generate " + numOfPersons + " players, however there is only " + NC + " possible names combinations.");
             System.out.println("Therefore " + NC + " players has been generated.");
         }
     }
     
     /**
-     * Generates a Player object with a unique name
-     * @return A Player object
+     * Generates a Person object with a unique name
+     * @param type The object PersonType to be created
+     * @return A Person object
      */
-    public Player generatePlayer(){
+    public Person generatePerson(PersonType type){
         try{
             String firstName = "";
             String surName = "";
-
             do{
                 // Gets a random name from the lists
-                firstName = fNTest.get(new Random().nextInt(fNTest.size()));
-                surName = sNTest.get(new Random().nextInt(sNTest.size()));
-
+                //firstName = fNTest.get(new Random().nextInt(fNTest.size()));
+                //surName = sNTest.get(new Random().nextInt(sNTest.size()));
+                firstName = firstNames.get(new Random().nextInt(firstNames.size()));
+                surName = surNames.get(new Random().nextInt(surNames.size()));
             } while(checkPlayerDublet(firstName, surName));
             // If the generatePlayer() is called more times than there is available combinations
             // of names, the condition (checkPlayerDublet(firstName, surName)) will always
@@ -144,31 +162,41 @@ public class PlayerFactory {
 
             // Solution 1: Count the number of possible combinations of firstnames + surnames 
             // and compare it to the amount of players created in the database. 
-
-            Player player = new Player(firstName, surName);
-            return player;
-
+            Person person;
+            switch(type){
+                case PLAYER:
+                    person = new Player(firstName, surName);
+                    break;
+                
+                case MANAGER:
+                    person = new Manager(firstName, surName);
+                    break;
+                default: person = null;
+                break;
+            }
+            return person;
+            
         } catch (Exception e){
             e.printStackTrace();
             return null;
         }
     }
     
-    /** Checks whether an existing Player object's name matches the given name.
+    /** Checks whether an existing Person object's name matches the given name.
      * 
      * @param fName the firstname of the name to be checked
      * @param sName the surname of the name to be checked
-     * @return TRUE if a Player with that name already exists.
+     * @return TRUE if a Person with that name already exists.
      */
     public boolean checkPlayerDublet(String fName, String sName){
         String name = fName + " " + sName;
-        for(int i = 0; i < this.PLAYERS.size(); i++){
-            if(name.equals(this.PLAYERS.get(i).getName())){
-                // returns true if the player exists
+        for(int i = 0; i < this.PERSONS.size(); i++){
+            if(name.equals(this.PERSONS.get(i).getName())){
+                // returns true if the person exists
                 return true;
             }
         }
-        // returns false if no such player with that name exists
+        // returns false if no such person with that name exists
         return false;
     }
     
@@ -200,27 +228,27 @@ public class PlayerFactory {
         return list;
     }
     
-    public Player getPlayerByID(UUID id){
-        for(Player player : PLAYERS){
-            if(player.getID().equals(id)){
-                return player;
+    public Person getPersonByID(UUID id){
+        for(Person person : PERSONS){
+            if(person.getID().equals(id)){
+                return person;
             }
         }
         return null;
     }
     
-    public ArrayList<Player> getAllPlayers(){
-        return PlayerFactory.PLAYERS;
+    public ArrayList<Person> getAllPersons(){
+        return PersonFactory.PERSONS;
     }
     
     public ArrayList<Club> getAllClubs(){
-        return PlayerFactory.CLUBS;
+        return PersonFactory.CLUBS;
     }
     
     /** Computes the total amounts of possible name combinations
      * 
-     * @param firstnames The first name 
-     * @param surnames The sur name
+     * @param firstnames The list of all first names
+     * @param surnames The list of all surnames
      * @return The total amount of possible name combinations
      */
     public int namesCombinations(ArrayList<String> firstnames, ArrayList<String> surnames){

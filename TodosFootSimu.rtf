@@ -10,10 +10,36 @@
 \b0 \
 \ul Immediates:\ulnone \
  - Fix generatePlayers() \'97 done \
- - Employ polymorphism by adding a Manager class, maybe even a talent scout or director class as well. \
+ - Employ polymorphism by adding a Manager class \'97 done\
+	- maybe even a talent scout or director class as well. \
+\
+ - DateManager\
+	- Convert int age into Date birthday\
+\
+ - Enumeration of the subclasses of Person: Player, Manager\
+ - Position as an instance variable to a player \
+	- Make an Position interface\
+		- which takes subclasses of different positions\
+		- each position has different behaviors: effect in some kind of way the player\'92s mentality\
+		- or technical skills \
+\
+ - A team is composed of different positions\
+	- the team plays optimally, when players with top abilities for a position is placed in that position\
+		- this increases the team\'92s chance of winning.\
+ - The overall skill level of a team increases a team\'92s chance of winning.\
+	- There must be some random factor to decide who\'92ll win a match (or the chance of scoring a goal)\
+		- This will be impacted by the overall skill for a team. \
+\
+ - Style of play/Tactics for a club:\
+	- interface with different subclasses: attacking, normal, defensive\
+		- which would affect the mentality of players \
 \
 \ul Future:\ulnone \
  - Find a solution to the \'91Overridable call in constructor\'92-warning. \
+ - Generate all Clubs which should be in the league\
+ - Implement a time control\
+	- When the app starts, a date is set.\
+	- by clicking a button, time is fast-forwarded to a new date.\
 \
 
 \b GUI: 

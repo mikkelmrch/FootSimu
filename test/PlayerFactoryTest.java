@@ -38,7 +38,7 @@ public class PlayerFactoryTest {
     }
 
     /**
-     * Test of register method, of class PlayerFactory.
+     * Test of register method, of class PersonFactory.
      */
     @Test
     public void testRegister() {
@@ -46,7 +46,7 @@ public class PlayerFactoryTest {
         int age = 10;
         String name = "Karl";
         Club club = new Club("Aab", 1920);
-        PlayerFactory instance = new PlayerFactory();
+        PersonFactory instance = new PersonFactory();
         instance.register(10, "Karl", new Club("Aab", 1920));
         
         
@@ -55,36 +55,36 @@ public class PlayerFactoryTest {
     }
 
     /**
-     * Test of generateClubs method, of class PlayerFactory.
+     * Test of generateClubs method, of class PersonFactory.
      */
     @Test
     public void testGenerateClubs() {
         System.out.println("generateClubs");
-        PlayerFactory instance = new PlayerFactory();
+        PersonFactory instance = new PersonFactory();
         instance.generateClubs();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of generatePlayers method, of class PlayerFactory.
+     * Test of generatePersons method, of class PersonFactory.
      */
     @Test
-    public void testGeneratePlayers() {
+    public void testGeneratePersons() {
         System.out.println("generatePlayers");
-        PlayerFactory instance = new PlayerFactory();
+        PersonFactory instance = new PersonFactory();
         instance.generatePlayers();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getFNCount method, of class PlayerFactory.
+     * Test of getFNCount method, of class PersonFactory.
      */
     @Test
     public void testGetFNCount() {
         System.out.println("getFNCount");
-        PlayerFactory instance = new PlayerFactory();
+        PersonFactory instance = new PersonFactory();
         int expResult = 0;
         int result = instance.getFNCount();
         assertEquals(expResult, result);
@@ -93,12 +93,12 @@ public class PlayerFactoryTest {
     }
 
     /**
-     * Test of getSNCount method, of class PlayerFactory.
+     * Test of getSNCount method, of class PersonFactory.
      */
     @Test
     public void testGetSNCount() {
         System.out.println("getSNCount");
-        PlayerFactory instance = new PlayerFactory();
+        PersonFactory instance = new PersonFactory();
         int expResult = 0;
         int result = instance.getSNCount();
         assertEquals(expResult, result);
@@ -107,12 +107,12 @@ public class PlayerFactoryTest {
     }
 
     /**
-     * Test of getSortedPlayerList method, of class PlayerFactory.
+     * Test of getSortedPlayerList method, of class PersonFactory.
      */
     @Test
     public void testGetSortedPlayerList() {
         System.out.println("getSortedPlayerList");
-        PlayerFactory instance = new PlayerFactory();
+        PersonFactory instance = new PersonFactory();
         ArrayList<Player> expResult = null;
         ArrayList<Player> result = instance.getSortedPlayerList();
         assertEquals(expResult, result);

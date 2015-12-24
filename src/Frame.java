@@ -16,7 +16,7 @@ import javax.swing.JLabel;
  * @author mikkelmoerch
  */
 public class Frame extends javax.swing.JFrame {
-    static PlayerFactory PF = new PlayerFactory();
+    static PersonFactory PF = new PersonFactory();
     
     /**
      * Creates new form Frame
@@ -27,7 +27,7 @@ public class Frame extends javax.swing.JFrame {
         PF.registerClub("Aab", 1920, getClub1());
         PF.registerClub("AGF", 1889, getClub2());
         PF.registerClub("FCK", 1905, getClub3());
-        System.out.println(PF.getAllPlayers().size());
+        System.out.println(PF.getAllPersons().size());
         /*
         PF.generatePlayer();
         PF.generatePlayer();
@@ -39,9 +39,9 @@ public class Frame extends javax.swing.JFrame {
         PF.generatePlayer();
         PF.generatePlayer();
         PF.generatePlayer();*/
-        PF.generatePlayers(12, 3);
+        PF.generatePersons(12, 3);
         
-        addToBox(allPlayersBox, PF.getSortedPlayerList(PF.PLAYERS));
+        addToBox(allPlayersBox, PF.getSortedPlayerList(PF.PERSONS));
         // Add players in club 1 to box of that club
         addToBoxByID(club1Box, PF.getAllClubs().get(0).getPlayers());
         // Add players in club 2 to box of that club
@@ -249,7 +249,7 @@ public class Frame extends javax.swing.JFrame {
         ArrayList<Player> playerList = new ArrayList<Player>();
         // Convert all UUID to Player Objects
         for(UUID player : list){
-            playerList.add(PF.getPlayerByID(player));
+            playerList.add(PF.getPersonByID(player));
         }
         // Sort the list
         ArrayList<Player> sortedList = PF.getSortedPlayerList((playerList));

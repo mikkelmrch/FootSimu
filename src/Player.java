@@ -11,41 +11,54 @@ import java.util.UUID;
  *
  * @author mikkelmoerch
  */
-public class Player implements Comparable<Player> {
-    private int age;
-    private String firstName;
-    private String lastName;
-    private Club club;
-    private UUID id;
+public class Player extends Person implements Comparable<Player> {
+
+    /**
+     * Eventually player stats as instance variables:
+     * 
+     * Basic:
+     * String position
+     * String footed
+     * int height
+     * int weight
+     * 
+     * Technical:
+     * int finishing
+     * int passing
+     * int crossing
+     */
     
-    public Player(int age, String firstname, String lastname, Club club){
-        this.age = age;
-        this.firstName = firstname;
-        this.lastName = lastname;
-        this.club = club;
-        this.id = UUID.randomUUID();
+    /** attacking **/
+    int shooting;
+    int passing;
+    
+    /** defending **/
+    int marking;
+    int tackling;
+    
+    /** physical **/
+    int pace;
+    int strength;
+    int stamina;
+    
+    String position;
+    
+   /**
+    * 
+    * @param age
+    * @param firstname
+    * @param surname
+    * @param club 
+    */
+    public Player(int age, String firstname, String surname, Club club){
+        super(age, firstname, surname, club);
     }
     
     public Player(String firstname, String lastname){
-        this.age = 1;
-        this.firstName = firstname;
-        this.lastName = lastname;
-        this.club = null;
-        this.id = UUID.randomUUID();
+        super(firstname, lastname);
     }
     
-    public UUID getID(){
-        return this.id;
-    }
-    
-    public String getName(){
-        return this.firstName+" "+this.lastName;
-    }
-    
-    public int getAge(){
-        return this.age;
-    }
-    
+    @Override
     public int compareTo(Player p){
         return this.getName().compareTo(p.getName());
     }
