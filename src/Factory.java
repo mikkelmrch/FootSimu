@@ -16,19 +16,25 @@ import javax.swing.JLabel;
  *
  * @author mikkelmoerch
  */
-public class PersonFactory {
+public class Factory {
     /** List of all registered persons. */
     static ArrayList<Person> PERSONS = new ArrayList<Person>();
     /** List of all registred clubs. */
     static ArrayList<Club> CLUBS = new ArrayList<Club>();
-    //This may not be needed -- static ArrayList<Manager> MANAGERS = new ArrayList<Manager>();
+    /** List of all registered seasons */
+    static ArrayList<League> SEASONS = new ArrayList<League>();
+    
+    static int seasonCount = 0;
+    /** List of all firstnames and surnames */
     ArrayList<String> firstNames;
     ArrayList<String> surNames;
     ArrayList<String> fNTest;
     ArrayList<String> sNTest;
+    
+    /** Enumeration of the types of Persons that can be generated */
     public enum PersonType {PLAYER, MANAGER};
 
-    public PersonFactory() {
+    public Factory() {
         this.firstNames = new ArrayList<>(Arrays.asList("Anders", "Andreas", "Albert", 
             "William", "Noah", "Emil", "Frederik", "Oliver", "Magnus", 
             "Elias", "Anton", "Alfred", "Alexander", 
@@ -73,6 +79,9 @@ public class PersonFactory {
         
                 this.fNTest = new ArrayList<>(Arrays.asList("Anders", "Bjarne", "Carsten","Rasmus", "Bastian", "Ludvig", "Milas", "Jacob"));
                 this.sNTest = new ArrayList<>(Arrays.asList("Andersen", "Curth", "Jeppesen","Winther", "Østergård","Lund", "Madsen", "Villadsen"));
+                
+                League league = new League();
+                SEASONS.add(league);
     }
     
     public void registerPlayer(int age, String firstname, String lastname, Club club){
@@ -86,7 +95,17 @@ public class PersonFactory {
      * @param year The year the club was founded.
      */
     public void registerClub(String name, int year){
-        new Club(name, year);
+        Club c = new Club(name, year);
+        CLUBS.add(c);
+    }
+    
+    public void newSeason(){
+        League l = new League();
+        SEASONS.add(l);
+        seasonCount = seasonCount + 1;
+        for(Club c : CLUBS){
+            c.newSeason();
+        }
     }
     
     /** Generates a given amount of Person objects to each existing club.
@@ -238,11 +257,15 @@ public class PersonFactory {
     }
     
     public ArrayList<Person> getAllPersons(){
-        return PersonFactory.PERSONS;
+        return Factory.PERSONS;
     }
     
     public ArrayList<Club> getAllClubs(){
-        return PersonFactory.CLUBS;
+        return Factory.CLUBS;
+    }
+    
+    public League getSeason(){
+        return SEASONS.get(seasonCount);
     }
     
     /** Computes the total amounts of possible name combinations

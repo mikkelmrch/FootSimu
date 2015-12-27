@@ -13,7 +13,7 @@ import java.util.UUID;
  */
 public class TestClass {
     public static void main(String[] args){
-        PersonFactory PF = new PersonFactory();
+        Factory PF = new Factory();
         
         // Superligaen
         
@@ -33,8 +33,8 @@ public class TestClass {
         int XIplayersForEachClub = 11 * PF.getAllClubs().size();
         int OneManagerForEachClub = PF.getAllClubs().size();
         
-        PF.generatePersons(XIplayersForEachClub, PersonFactory.PersonType.PLAYER);
-        PF.generatePersons(OneManagerForEachClub, PersonFactory.PersonType.MANAGER);
+        PF.generatePersons(XIplayersForEachClub, Factory.PersonType.PLAYER);
+        PF.generatePersons(OneManagerForEachClub, Factory.PersonType.MANAGER);
         
         /** Displaying clubs, players, their stats and manager. */
         /*
@@ -78,10 +78,34 @@ public class TestClass {
         }
         System.out.println(PF.namesCombinations(PF.firstNames, PF.surNames));
         
-        */
-        /** Setting up the league. */
+        /** Displaying the favourite team(s) to win and the expected team to relegated */
+            int best = 0;
+            String strBest = "";
+            int worst = 500;
+            String strWorst = "";
+        for(Club c : PF.getAllClubs()){
+            if(c.getTeamRating() > best){
+                best = c.getTeamRating();
+                strBest = c.getName();
+            }
+            if(c.getTeamRating() < worst){
+                worst = c.getTeamRating();
+                strWorst = c.getName();
+            }
+        }
+        System.out.println("The favourite to win the league is " + strBest + " with a rating of "+ best);
+        System.out.println("The favourite to be relegated is " + strWorst + " with a rating of "+ worst);
         
-        League league = new League();
+        /** Simulating seasons. */
+        runSeasons(10, PF);
+        
+    }
+    
+    public static void displaySeason(Factory PF){
+        
+        League league = PF.getSeason();
+        System.out.println("This is season number "+ (Factory.seasonCount+1));
+        System.out.println("");
         //Every club plays each other twice - one home and one away.
             for(int home = 0; home < PF.getAllClubs().size(); home++){
                     for(int away = 0; away < PF.getAllClubs().size(); away++){
@@ -150,7 +174,6 @@ public class TestClass {
             System.out.println(Math.round(CP.getClub().getTeamRatingWithMorale())+ " | ");
         }
         
-        
         // Morale of player from the club at the top of the table.
         UUID id2 = list.get(0).getClub().getPlayers().get(0);
         Player p2 = (Player) list.get(list.size()-1).getClub().getPersonByID(id2);
@@ -166,6 +189,17 @@ public class TestClass {
         Player p = (Player) list.get(list.size()-1).getClub().getPersonByID(id);
         System.out.println(p.getName() + " has a morale at: " +p.getMorale());
         
+        System.out.println("                                              ");
+        System.out.println("----------------------------------------------");
+        System.out.println("                                              ");
+           
         
+    }
+    
+    public static void runSeasons(int a, Factory PF){
+        for(int i = 0; i < a; i++){
+            displaySeason(PF);
+            PF.newSeason();
+        }
     }
 }

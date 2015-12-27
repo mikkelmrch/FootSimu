@@ -171,15 +171,50 @@ public class Match {
     
     public void updatePlayerMorale(Club winner, Club looser){
         
+        int winnerDifferenceInRatingToOpponent = winner.getTeamRating() - looser.getTeamRating();
+        int looserDifferenceInRatingToOpponent = looser.getTeamRating() - winner.getTeamRating();
+        
         for(UUID id : home.getPlayers()){
             Player p = (Player )winner.getPersonByID(id);
-            p.increaseMorale();
+            p.increaseMorale(winnerDifferenceInRatingToOpponent);
         }
         
         for(UUID id : looser.getPlayers()){
             Player p = (Player)looser.getPersonByID(id);
-            p.decreaseMorale();
+            p.decreaseMorale(looserDifferenceInRatingToOpponent);
         }
+    }
+    
+    public void updatePlayerMoraleAfterDraw(Club home, Club away){
+        int differenceInRating = home.getTeamRating() - away.getTeamRating();
+        
+        // If the home side is 30 or more rating points better than away
+        if(differenceInRating > 29){
+            for(UUID id : home.getPlayers()){
+                // decrease home side morale slightly
+                Player p = (Player) home.getPersonByID(id);
+                p.decreaseMorale(-30);
+            }
+            for(UUID id : away.getPlayers()){
+                // And increase away side morale slightly
+                Player p = (Player) away.getPersonByID(id);
+                p.increaseMorale(30);
+            }
+          // If the away side is 30 or more rating points better than away
+        } else if(differenceInRating < -29){
+            // decrease away side morale slightly
+            for(UUID id : away.getPlayers()){
+                Player p = (Player) away.getPersonByID(id);
+                p.decreaseMorale(-30);
+            }
+            // and increase home side morale slightly 
+            for(UUID id : home.getPlayers()){
+                Player p = (Player) home.getPersonByID(id);
+                p.increaseMorale(30);
+            }
+        }
+        
+        
     }
     
     public void informClubPerformance(){
@@ -188,8 +223,8 @@ public class Match {
             // if Home side has won
             if(getHomeGoals() > getAwayGoals()){
                 // Add to wins and losses
-                getHomeClub().getClubPerformance().hasWon();
-                getAwayClub().getClubPerformance().hasLost();
+                getHomeClub().getClubPerformance(Factory.seasonCount).hasWon();
+                getAwayClub().getClubPerformance(Factory.seasonCount).hasLost();
                 
                 // Increase home club's players' morale, decrease away club's players' morale.
                 updatePlayerMorale(getHomeClub(), getAwayClub());
@@ -197,8 +232,8 @@ public class Match {
             // if Away side has won
             } else if(getAwayGoals() > getHomeGoals()){
                 // Add to wins and losses
-                getHomeClub().getClubPerformance().hasLost();
-                getAwayClub().getClubPerformance().hasWon();
+                getHomeClub().getClubPerformance(Factory.seasonCount).hasLost();
+                getAwayClub().getClubPerformance(Factory.seasonCount).hasWon();
                 
                 // Increase away club's players' morale, decrease home club's players' morale.
                 updatePlayerMorale(getAwayClub(), getHomeClub());
@@ -206,18 +241,18 @@ public class Match {
             // if Match was drawn
             } else {
                 // Add to wins and losses
-                getHomeClub().getClubPerformance().hasDrawn();
-                getAwayClub().getClubPerformance().hasDrawn();
+                getHomeClub().getClubPerformance(Factory.seasonCount).hasDrawn();
+                getAwayClub().getClubPerformance(Factory.seasonCount).hasDrawn();
             }
             // Add to goal scores
-            getHomeClub().getClubPerformance().setGoalsScored(this.getHomeGoals());
-            getAwayClub().getClubPerformance().setGoalsScored(this.getAwayGoals());
+            getHomeClub().getClubPerformance(Factory.seasonCount).setGoalsScored(this.getHomeGoals());
+            getAwayClub().getClubPerformance(Factory.seasonCount).setGoalsScored(this.getAwayGoals());
             // Add to goal scored against
-            getHomeClub().getClubPerformance().setGoalsAgainst(this.getAwayGoals());
-            getAwayClub().getClubPerformance().setGoalsAgainst(this.getHomeGoals());
+            getHomeClub().getClubPerformance(Factory.seasonCount).setGoalsAgainst(this.getAwayGoals());
+            getAwayClub().getClubPerformance(Factory.seasonCount).setGoalsAgainst(this.getHomeGoals());
             // Add to games played
-            getHomeClub().getClubPerformance().setGP();
-            getAwayClub().getClubPerformance().setGP();
+            getHomeClub().getClubPerformance(Factory.seasonCount).setGP();
+            getAwayClub().getClubPerformance(Factory.seasonCount).setGP();
         }
     }
     

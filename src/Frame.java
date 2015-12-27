@@ -16,7 +16,7 @@ import javax.swing.JLabel;
  * @author mikkelmoerch
  */
 public class Frame extends javax.swing.JFrame {
-    static PersonFactory PF = new PersonFactory();
+    static Factory PF = new Factory();
     
     /**
      * Creates new form Frame

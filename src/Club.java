@@ -17,7 +17,7 @@ public class Club {
     private int year;
     private UUID manager;
     private UUID id;
-    private ClubPerformance season;
+    private ArrayList<ClubPerformance> season = new ArrayList<>();
     private TeamLineUp lineup;
     
     /**
@@ -36,9 +36,9 @@ public class Club {
         this.year = year;
         this.id = UUID.randomUUID();
         this.players = new ArrayList<UUID>();
-        this.season = new ClubPerformance(this);
+        ClubPerformance c = new ClubPerformance(this, Factory.seasonCount);
+        season.add(c);
         this.lineup = new TeamLineUp();
-        PersonFactory.CLUBS.add(this);
     }
     
     public void addPlayerToClub(Player p){
@@ -47,6 +47,19 @@ public class Club {
         } else {
             System.out.println("The limit of a total of 28 players in a club has been reached.");
         }
+    }
+    
+    public void newSeason(){
+        ClubPerformance c = new ClubPerformance(this, Factory.seasonCount);
+        season.add(c);
+        /** This piece resets the morale of all players when a new season begins */
+        ArrayList<Player> plrs = new ArrayList<>();
+        for(UUID id : players){
+            plrs.add((Player)getPersonByID(id));
+        }
+        for(Player plr : plrs){
+                plr.resetMorale();
+            }
     }
     
     public int getTeamRating(){
@@ -86,7 +99,7 @@ public class Club {
     }
     
     public Person getPersonByID(UUID id){
-        for(Person person : PersonFactory.PERSONS){
+        for(Person person : Factory.PERSONS){
             if(person.getID().equals(id)){
                 return person;
             }
@@ -94,8 +107,8 @@ public class Club {
         return null;
     }
     
-    public ClubPerformance getClubPerformance(){
-        return this.season;
+    public ClubPerformance getClubPerformance(int index){
+        return this.season.get(index);
     }
     
     public TeamLineUp getLineUp(){

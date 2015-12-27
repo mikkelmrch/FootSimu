@@ -13,6 +13,7 @@ import java.util.UUID;
 public class ClubPerformance implements Comparable<ClubPerformance> {
     
     private Club club;
+    private int season;
     //private Date season;
     private int gamesPlayed = 0;
     private int points = 0;
@@ -23,8 +24,9 @@ public class ClubPerformance implements Comparable<ClubPerformance> {
     private int goalsAgainst = 0;
     private final UUID CPid = UUID.randomUUID();
     
-    public ClubPerformance(Club club){
+    public ClubPerformance(Club club, int season){
         this.club = club;
+        this.season = season;
     }
     
     public Club getClub(){

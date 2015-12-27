@@ -13,9 +13,14 @@ import java.util.UUID;
  * @author mikkelmoerch
  */
 public class League {
+    private UUID id = UUID.randomUUID();
     private ArrayList<Match> results = new ArrayList<>();
     //private Date season;
     private ArrayList<UUID> clubPerformances = new ArrayList<>();
+    
+    public League(){
+        
+    }
     
     public ArrayList<Match> getResults(){
         return this.results;
@@ -26,9 +31,9 @@ public class League {
     }
     
     public ClubPerformance getCP(UUID id){
-        for(int i = 0; i < PersonFactory.CLUBS.size(); i++){
-            if((PersonFactory.CLUBS.get(i).getClubPerformance().getID()).equals(id)){
-                return PersonFactory.CLUBS.get(i).getClubPerformance();
+        for(int i = 0; i < Factory.CLUBS.size(); i++){
+            if((Factory.CLUBS.get(i).getClubPerformance(Factory.seasonCount).getID()).equals(id)){
+                return Factory.CLUBS.get(i).getClubPerformance(Factory.seasonCount);
             }
         }
         return null;
@@ -39,13 +44,18 @@ public class League {
         results.add(m);
         // Add to CP list if they're not already added
         if(!checkHomeCPList(m)){
-            clubPerformances.add(m.getHomeClub().getClubPerformance().getID());
+            clubPerformances.add(m.getHomeClub().getClubPerformance(Factory.seasonCount).getID());
         }
         if(!checkAwayCPList(m)){
-            clubPerformances.add(m.getAwayClub().getClubPerformance().getID());
+            clubPerformances.add(m.getAwayClub().getClubPerformance(Factory.seasonCount).getID());
         }
     }
     
+    /**
+     * Checks if the home side of a match has been added to the list of ClubPerformances 
+     * @param m The match that has been played
+     * @return TRUE if the club already has been added
+     */
     public boolean checkHomeCPList(Match m){
         ArrayList<UUID> list = getCPList();
         if(list.size() == 0){
@@ -53,16 +63,21 @@ public class League {
         } else {
 
             for(int i = 0; i < list.size(); i++){
-                if(m.getHomeClub().getClubPerformance().getID().equals(list.get(i))){
+                if(m.getHomeClub().getClubPerformance(Factory.seasonCount).getID().equals(list.get(i))){
                     //System.out.println("The ID of the home side: " + m.getHomeClub().getClubPerformance().getID());
                     return true;
                 }
             }
         }
-        System.out.println("The ID of the home side: " + m.getHomeClub().getClubPerformance().getID());
+        System.out.println("The ID of the home side: " + m.getHomeClub().getClubPerformance(Factory.seasonCount).getID());
         return false;
     }
     
+    /**
+     * Checks if the away side of a match has been added to the list of ClubPerformances.
+     * @param m The match that has been played.
+     * @return TRUE if the club already has been added to the list.
+     */
     public boolean checkAwayCPList(Match m){
         ArrayList<UUID> list = getCPList();
         
@@ -70,7 +85,7 @@ public class League {
             return false;
         } else {
             for(int i = 0; i < list.size(); i++){
-                if(m.getAwayClub().getClubPerformance().getID().equals(list.get(i))){
+                if(m.getAwayClub().getClubPerformance(Factory.seasonCount).getID().equals(list.get(i))){
                         return true;
                 }
             }
@@ -89,4 +104,7 @@ public class League {
             return clonedList;
     }
     
+    public UUID getID(){
+        return this.id;
+    }
 }

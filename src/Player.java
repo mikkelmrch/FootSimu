@@ -59,8 +59,8 @@ public class Player extends Person implements Comparable<Player> {
      *  - Also, a favourite gains little to nothing if he wins. And a clear underdog looses
      *    only little if he does lose. 
      */ 
-    final double moraleIndex = 100;
-    double morale = 100;
+    private final double moraleIndex = 100;
+    private double morale = 100;
     
    /**
     * 
@@ -146,18 +146,48 @@ public class Player extends Person implements Comparable<Player> {
         return this.morale;
     }
     
-    public void increaseMorale(){
+    /**
+     * 
+     * @param differenceInRatingToOpponent Rating of player's team minus rating of opponent team
+     */
+    public void increaseMorale(int differenceInRatingToOpponent){
         // Morale can't be above 110
         if(getMorale() < 110){
-        this.morale = 1.01 * this.morale;
+            // If the opponent team is 30 or more points better
+            if(differenceInRatingToOpponent < -29){
+                this.morale = 1.05 * this.morale;
+            // If the player's team is 30 or more points better
+            } else if(differenceInRatingToOpponent > 30){
+                this.morale = 1.001 * this.morale;
+            // If the difference is below 30
+            } else {
+            this.morale = 1.01 * this.morale;
+            }
         }
     }
     
-    public void decreaseMorale(){
+    /**
+     * 
+     * @param differenceInRatingToOpponent Rating of player's team minus rating of opponent team
+     */
+    public void decreaseMorale(int differenceInRatingToOpponent){
         // Morale can't be below 90
         if(getMorale() > 90){
-        this.morale = 0.99 * this.morale;
+            // If loose to clear favourite
+            if(differenceInRatingToOpponent < -29){
+                this.morale = 0.999 * this.morale;
+            // If loose to clear underdog
+            } else if(differenceInRatingToOpponent > 30){
+                this.morale = 0.95 * this.morale;
+            // If the difference is below 30
+            } else {
+                this.morale = 0.99 * this.morale;
+            }
         }
+    }
+    
+    public void resetMorale(){
+        this.morale = moraleIndex;
     }
     
     @Override
