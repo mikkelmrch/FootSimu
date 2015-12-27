@@ -22,11 +22,8 @@
 	- Convert int age into Date birthday\
 \
  - Enumeration of the subclasses of Person: Player, Manager\
- - Position as an instance variable to a player \
-	- Make an Position interface\
-		- which takes subclasses of different positions\
-		- each position has different behaviors: effect in some kind of way the player\'92s mentality\
-		- or technical skills \
+ - Position as an instance variable to a player (Decorator pattern)\
+		- each position has different top abilities. A player in the striker position will need to have a high finishing rating whereas a central defender will need to have a high marking and tackling rating.\
 \
  - A team is composed of different positions\
 	- the team plays optimally, when players with top abilities for a position is placed in that position\
@@ -35,9 +32,11 @@
 	- There must be some random factor to decide who\'92ll win a match (or the chance of scoring a goal)\
 		- This will be impacted by the overall skill for a team. \
 \
- - Style of play/Tactics for a club:\
+ - Style of play/Tactics for a club: (Strategy pattern - as this is something that should be changeable during runtime)\
 	- interface with different subclasses: attacking, normal, defensive\
 		- which would affect the mentality of players \
+		- How should mentality be reflected in the the program?\
+			- One way is to add to the scoring chances of the team that choose an attacking mentality, while add to the scoring chances of the opponent - as the attacking team will have less focus on defense and will be more vulnerable to giving chances away. \
 \
 \ul Future:\ulnone \
  - Find a solution to the \'91Overridable call in constructor\'92-warning. \

@@ -18,6 +18,7 @@ public class Club {
     private UUID manager;
     private UUID id;
     private ClubPerformance season;
+    private TeamLineUp lineup;
     
     /**
      * Consider employing a new class 'TeamLineup' aggregated into Club, which
@@ -36,6 +37,7 @@ public class Club {
         this.id = UUID.randomUUID();
         this.players = new ArrayList<UUID>();
         this.season = new ClubPerformance(this);
+        this.lineup = new TeamLineUp();
         PersonFactory.CLUBS.add(this);
     }
     
@@ -85,6 +87,10 @@ public class Club {
     
     public ClubPerformance getClubPerformance(){
         return this.season;
+    }
+    
+    public TeamLineUp getLineUp(){
+        return this.lineup;
     }
     
     public String getName(){

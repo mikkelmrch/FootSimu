@@ -28,8 +28,6 @@ public class Match {
     private double homeChanceOfScoring;
     private double awayChanceOfScoring;
     
-    private Duration time;
-    
     public Match(Club home, Club away){
         this.home = home;
         this.away = away;
