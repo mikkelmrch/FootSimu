@@ -10,11 +10,12 @@ import java.util.UUID;
  *
  * @author mikkelmoerch
  */
-public class ClubPerformance {
+public class ClubPerformance implements Comparable<ClubPerformance> {
     
     private Club club;
     //private Date season;
     private int gamesPlayed = 0;
+    private int points = 0;
     private int wins = 0;
     private int losses = 0;
     private int draws = 0;
@@ -32,6 +33,10 @@ public class ClubPerformance {
     
     public int getGP(){
         return this.gamesPlayed;
+    }
+    
+    public int getPoints(){
+        return this.points;
     }
     
     public int getWins(){
@@ -60,6 +65,7 @@ public class ClubPerformance {
     
     public void hasWon(){
         this.wins = this.wins + 1;
+        this.points = this.points + 3;
     }
     
     public void hasLost(){
@@ -68,6 +74,7 @@ public class ClubPerformance {
     
     public void hasDrawn(){
         this.draws = this.draws + 1;
+        this.points = this.points + 1;
     }
     
     public void setGoalsScored(int g){
@@ -82,4 +89,8 @@ public class ClubPerformance {
         return this.CPid;
     }
     
+    @Override
+    public int compareTo(ClubPerformance c) {
+        return new Integer(c.getPoints()).compareTo(this.getPoints());
+    }
 }

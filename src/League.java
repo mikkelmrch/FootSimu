@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.UUID;
 
@@ -77,4 +78,15 @@ public class League {
         return false;
     }
 
+    public ArrayList<ClubPerformance> getSortedPlayerList(ArrayList<ClubPerformance> list){
+            // Clone the current list of scouting sessions
+            ArrayList<ClubPerformance> clonedList = (ArrayList<ClubPerformance>)list.clone();
+
+            // Perform the actual sorting of the list, based on date
+            Collections.sort(clonedList);
+
+            // Return the sorted list
+            return clonedList;
+    }
+    
 }

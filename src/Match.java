@@ -102,7 +102,7 @@ public class Match {
         randomFactor = Math.random();
         
         /** If the better team has an overall rating that's 9 percentage larger than
-         * the other team, it's random factor of creating a chance will be increased
+         * the other team, its random factor of creating a chance will be increased
          * by 9 percentage of its original value.
          */
         
@@ -110,20 +110,20 @@ public class Match {
             // Home
             randomFactor = (randomFactor * overallTeamEvaluation());
             this.homeChancesEveryTenth = randomFactor;
-            System.out.println("Chances every 10th minute for "+ getHomeName() + " is " + this.homeChancesEveryTenth);
+            //System.out.println("Chances every 10th minute for "+ getHomeName() + " is " + this.homeChancesEveryTenth);
             // Away
             this.awayChancesEveryTenth = Math.random();
-            System.out.println("Chances every 10th minute for "+ getAwayName() + " is " + this.awayChancesEveryTenth);
-            System.out.println("-------------------------------------------------");
+            //System.out.println("Chances every 10th minute for "+ getAwayName() + " is " + this.awayChancesEveryTenth);
+            //System.out.println("-------------------------------------------------");
         } else {
             // Away
             randomFactor = (randomFactor * overallTeamEvaluation());
             this.awayChancesEveryTenth = randomFactor;
-            System.out.println("Chances every 10th minute for "+ getAwayName() + " is " + this.awayChancesEveryTenth);
+            //System.out.println("Chances every 10th minute for "+ getAwayName() + " is " + this.awayChancesEveryTenth);
             // Home
             this.homeChancesEveryTenth = Math.random();
-            System.out.println("Chances every 10th minute for "+ getHomeName() + " is " + this.homeChancesEveryTenth);
-            System.out.println("-------------------------------------------------");
+            //System.out.println("Chances every 10th minute for "+ getHomeName() + " is " + this.homeChancesEveryTenth);
+            //System.out.println("-------------------------------------------------");
         }
     }
     
