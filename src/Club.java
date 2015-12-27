@@ -58,8 +58,17 @@ public class Club {
         return overall;
     }
     
-    public int getTeamOffensiveRating(){
-        int overall = 0;
+    public double getTeamRatingWithMorale(){
+        double overall = 0;
+            for(UUID id : players){
+                Player p = (Player) getPersonByID(id);
+                overall = overall + p.getOverallRatingWithMorale();
+            }
+        return overall;
+    }
+    
+    public double getTeamOffensiveRating(){
+        double overall = 0;
             for(UUID id : players){
                 Player p = (Player) getPersonByID(id);
                 overall = overall + p.getOffensiveRating();
@@ -67,8 +76,8 @@ public class Club {
         return overall;
     }
     
-    public int getTeamDefensiveRating(){
-        int overall = 0;
+    public double getTeamDefensiveRating(){
+        double overall = 0;
             for(UUID id : players){
                 Player p = (Player) getPersonByID(id);
                 overall = overall + p.getDefensiveRating();

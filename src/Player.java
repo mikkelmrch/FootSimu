@@ -43,6 +43,25 @@ public class Player extends Person implements Comparable<Player> {
     
     String position;
     
+    /** Morale: how happy and in-form a player is currently. 
+     * Has an index at 100. That is, when a player's morale index is above 100,
+     * it has a positive impact on his performance through his overall skill 
+     * level and similarly when below 60 a negative impact.
+     * 
+     * A player gets a morale boost when winning a match and experiences a fall
+     * in morale when loosing a match.  
+     * 
+     * No change when a match is drawn. However, this could be changed:
+     *  - Expectations to a match could be introduced.
+     *  - Determining the favourite to win by comparing overall ratings.
+     *  - Thus, a clear favourite could loss morale points if they do manage to win.
+     *    And an underdog could gain morale points if they do not loss to a clear favourite.
+     *  - Also, a favourite gains little to nothing if he wins. And a clear underdog looses
+     *    only little if he does lose. 
+     */ 
+    final double moraleIndex = 100;
+    double morale = 100;
+    
    /**
     * 
     * @param age
@@ -68,6 +87,18 @@ public class Player extends Person implements Comparable<Player> {
     public int getOverallRating(){
         int overall = 0;
         overall = getShooting()+getPassing()+getMarking()+getTackling()+getPace()+getStrength()+getStamina();
+        return overall;
+    }
+    
+    public double getOverallRatingWithMorale(){
+                double overall = 0;
+        overall = getShooting()+getPassing()+getMarking()+getTackling()+getPace()+getStrength()+getStamina();
+        
+        /** This has to be moved as we do not want the impact by the morale to be displayed. */
+        //Impact by Player's morale
+        double index = getMorale()/this.moraleIndex;
+        overall = overall * index;
+        
         return overall;
     }
     
@@ -109,6 +140,24 @@ public class Player extends Person implements Comparable<Player> {
     
     public int getStamina(){
         return this.stamina;
+    }
+    
+    public double getMorale(){
+        return this.morale;
+    }
+    
+    public void increaseMorale(){
+        // Morale can't be above 110
+        if(getMorale() < 110){
+        this.morale = 1.01 * this.morale;
+        }
+    }
+    
+    public void decreaseMorale(){
+        // Morale can't be below 90
+        if(getMorale() > 90){
+        this.morale = 0.99 * this.morale;
+        }
     }
     
     @Override

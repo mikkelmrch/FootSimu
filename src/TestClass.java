@@ -18,29 +18,17 @@ public class TestClass {
         // Superligaen
         
         PF.registerClub("AGF", 1905);
-
         PF.registerClub("Aab", 1920);
-
         PF.registerClub("FCK", 1925);
-        
         PF.registerClub("FCM", 1932);
-        
         PF.registerClub("SØN", 1902);
-        
-        PF.registerClub("OB", 1805);
-        
+        PF.registerClub("OB ", 1805);
         PF.registerClub("RFC", 1940);
-        
         PF.registerClub("FCN", 1920);
-        
         PF.registerClub("BIF", 1900);
-        
         PF.registerClub("EfB", 1920);
-        
         PF.registerClub("VFF", 1926);
-        
         PF.registerClub("HIK", 1883);
-        
         
         int XIplayersForEachClub = 11 * PF.getAllClubs().size();
         int OneManagerForEachClub = PF.getAllClubs().size();
@@ -48,6 +36,8 @@ public class TestClass {
         PF.generatePersons(XIplayersForEachClub, PersonFactory.PersonType.PLAYER);
         PF.generatePersons(OneManagerForEachClub, PersonFactory.PersonType.MANAGER);
         
+        /** Displaying clubs, players, their stats and manager. */
+        /*
         for(Club club : PF.getAllClubs()){
         System.out.println("Club: " + club.getName());
         System.out.println("-------------------------------------------------");
@@ -88,10 +78,11 @@ public class TestClass {
         }
         System.out.println(PF.namesCombinations(PF.firstNames, PF.surNames));
         
+        */
+        /** Setting up the league. */
+        
         League league = new League();
-        
-        //Every club should play each other twice - one home and one away.
-        
+        //Every club plays each other twice - one home and one away.
             for(int home = 0; home < PF.getAllClubs().size(); home++){
                     for(int away = 0; away < PF.getAllClubs().size(); away++){
                         if(home != away){
@@ -124,12 +115,6 @@ public class TestClass {
                     }
             }
         
-        /*
-        for(Match match : league.getResults()){
-            System.out.print(match.getHomeName() + " - " + match.getAwayName());
-            System.out.print(" | ");
-            System.out.println(match.getScore());
-        }*/
         System.out.println("-------------------------------------------------");
         // Display League table (via ClubPerformance objects)
         System.out.print("GA | ");
@@ -139,8 +124,9 @@ public class TestClass {
         System.out.print(" D | ");
         System.out.print(" G | ");
         System.out.print("GA | ");
-        System.out.print("Name | ");
-        System.out.println("Rating| ");
+        System.out.print("Name| ");
+        System.out.print("Rating| ");
+        System.out.println("Morale| ");
         
         // Making an arrayList of ClubPerformances
         ArrayList<ClubPerformance> list = new ArrayList<>();
@@ -160,7 +146,26 @@ public class TestClass {
             System.out.print(CP.getGoals()+ " | ");
             System.out.print(CP.getGoalsAgains()+ " | ");
             System.out.print(CP.getClub().getName()+ " | ");
-            System.out.println(CP.getClub().getTeamRating()+ " | ");
+            System.out.print(CP.getClub().getTeamRating()+ " | ");
+            System.out.println(Math.round(CP.getClub().getTeamRatingWithMorale())+ " | ");
         }
+        
+        
+        // Morale of player from the club at the top of the table.
+        UUID id2 = list.get(0).getClub().getPlayers().get(0);
+        Player p2 = (Player) list.get(list.size()-1).getClub().getPersonByID(id2);
+        System.out.println(p2.getName() + " has a morale at: " +p2.getMorale());
+        
+        // Morale of player from the club at the middle of the table.
+        UUID id3 = list.get(5).getClub().getPlayers().get(0);
+        Player p3 = (Player) list.get(list.size()-1).getClub().getPersonByID(id3);
+        System.out.println(p3.getName() + " has a morale at: " +p3.getMorale());
+        
+        // Morale of player from the club at the bottom of the table.
+        UUID id = list.get(list.size()-1).getClub().getPlayers().get(0);
+        Player p = (Player) list.get(list.size()-1).getClub().getPersonByID(id);
+        System.out.println(p.getName() + " has a morale at: " +p.getMorale());
+        
+        
     }
 }

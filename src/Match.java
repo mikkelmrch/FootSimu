@@ -1,5 +1,7 @@
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.UUID;
 /*
  * The Match class contains information about a match between two clubs.
  */
@@ -31,8 +33,8 @@ public class Match {
     public Match(Club home, Club away){
         this.home = home;
         this.away = away;
-        this.homeRating = home.getTeamRating();
-        this.awayRating = away.getTeamRating();
+        this.homeRating = home.getTeamRatingWithMorale();
+        this.awayRating = away.getTeamRatingWithMorale();
     }
     
     public void setHome(Club club){
@@ -167,6 +169,19 @@ public class Match {
         this.isPlayed = true;
     }
     
+    public void updatePlayerMorale(Club winner, Club looser){
+        
+        for(UUID id : home.getPlayers()){
+            Player p = (Player )winner.getPersonByID(id);
+            p.increaseMorale();
+        }
+        
+        for(UUID id : looser.getPlayers()){
+            Player p = (Player)looser.getPersonByID(id);
+            p.decreaseMorale();
+        }
+    }
+    
     public void informClubPerformance(){
         if(this.isPlayed){
             
@@ -176,11 +191,17 @@ public class Match {
                 getHomeClub().getClubPerformance().hasWon();
                 getAwayClub().getClubPerformance().hasLost();
                 
+                // Increase home club's players' morale, decrease away club's players' morale.
+                updatePlayerMorale(getHomeClub(), getAwayClub());
+                
             // if Away side has won
             } else if(getAwayGoals() > getHomeGoals()){
                 // Add to wins and losses
                 getHomeClub().getClubPerformance().hasLost();
                 getAwayClub().getClubPerformance().hasWon();
+                
+                // Increase away club's players' morale, decrease home club's players' morale.
+                updatePlayerMorale(getAwayClub(), getHomeClub());
                 
             // if Match was drawn
             } else {
